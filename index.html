@@ -14,7 +14,7 @@
 <p>{{ 1 + 1 }}</p>
 
 <form name="todoForm" novalidate>
-    <input type="text" name="todoName" ng-model="todo" required>
+    <input type="text" name="todoName" ng-model="app.todo.name" required>
     <p ng-if="false">{{ todo * 1.08 | currency: '¥' : 0 }}</p>
     <p ng-show="todoForm.todoName.$invalid">必須です！！</p>
     <button ng-disabled="todoForm.$invalid" ng-click="app.clickButton();">click</button>
@@ -22,12 +22,21 @@
 
 <p>税込 {{ todo * 1.08 | currency: '¥' : 0}}</p>
 
+<ul>
+  <li ng-repeat="item in app.list">
+      {{item.name}} - {{ item.date | date: 'yyyy/MM/dd HH:mm:ss' }}
+  </li>
+</ul>
+
 <script>
 (function(){
     angular.module('myApp', []).controller('appCtrl', [function(){
-        this.clickButton = function() {
-            alert('test');
-        };
+      this.list = [];
+      this.clickButton = function(){
+      this.todo.date = Date.now();
+      this.list.push(this.todo)
+      this.todo = {};
+    }
     }]);
     // この[] 重要
 })();
