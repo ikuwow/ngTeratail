@@ -1,0 +1,27 @@
+<html ng-app><!-- it is required!! -->
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+</head>
+
+<style>
+  input.ng-invalid{
+    border: solid 1px red;
+  }
+</style>
+
+<body>
+
+<h1>ngTeratail</h1>
+<p>Hello AngularJS.</p>
+<p>{{ 1 + 1 }}</p>
+
+<form name="todoForm" novalidate>
+    <input type="text" name="todoName" ng-model="todo" required>
+    <p ng-if="false">{{ todo * 1.08 | currency: '¥' : 0 }}</p>
+    <p ng-show="todoForm.todoName.$invalid">必須です！！</p>
+    <button ng-disabled="todoForm.$invalid">click</button>
+</form>
+<p>税込 {{ todo * 1.08 | currency: '¥' : 0}}</p>
+
+</body>
+</html>
