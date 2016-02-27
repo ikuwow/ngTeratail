@@ -5,6 +5,9 @@
       input.ng-invalid{
         border: solid 1px red;
       }
+      .done {
+          text-decoration: line-through;
+      }
     </style>
 </head>
 <body ng-controller="appCtrl as app">
@@ -28,7 +31,10 @@
 <p>税込 {{ todo * 1.08 | currency: '¥' : 0}}</p>
 
 <ul>
-  <li ng-repeat="item in app.list | filter: app.search | orderBy: '-date'">
+  <li ng-repeat="item in app.list | filter: app.search | orderBy: '-date'"
+      ng-click="app.checkList(item)"
+      ng-class="{done: item.done}"
+  >
       {{item.name}} - {{ item.date | date: 'yyyy/MM/dd HH:mm:ss' }}
   </li>
 </ul>
@@ -36,14 +42,18 @@
 <script>
 (function(){
     angular.module('myApp', []).controller('appCtrl', [function(){
+    // この[] 重要
       this.list = [];
       this.clickButton = function(){
-      this.todo.date = Date.now();
-      this.list.push(this.todo)
-      this.todo = {};
-    }
+          this.todo.date = Date.now();
+          this.list.push(this.todo)
+          this.todo = {};
+      }
+
+      this.checkList = function(item) {
+          item.done = !item.done;
+      }
     }]);
-    // この[] 重要
 })();
 </script>
 </body>
