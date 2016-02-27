@@ -28,7 +28,7 @@
 <p>税込 {{ todo * 1.08 | currency: '¥' : 0}}</p>
 
 <ul>
-  <li ng-repeat="item in app.list | filter: app.search">
+  <li ng-repeat="item in app.list | filter: app.search | orderBy: '-date'">
       {{item.name}} - {{ item.date | date: 'yyyy/MM/dd HH:mm:ss' }}
   </li>
 </ul>
