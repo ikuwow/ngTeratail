@@ -14,16 +14,21 @@
 <p>{{ 1 + 1 }}</p>
 
 <form name="todoForm" novalidate>
+    <label>new Task:</label>
     <input type="text" name="todoName" ng-model="app.todo.name" required>
     <p ng-if="false">{{ todo * 1.08 | currency: '¥' : 0 }}</p>
     <p ng-show="todoForm.todoName.$invalid">必須です！！</p>
     <button ng-disabled="todoForm.$invalid" ng-click="app.clickButton();">click</button>
 </form>
 
+<form>
+    <input type="text" ng-model="app.search">
+</form>
+
 <p>税込 {{ todo * 1.08 | currency: '¥' : 0}}</p>
 
 <ul>
-  <li ng-repeat="item in app.list">
+  <li ng-repeat="item in app.list | filter: app.search">
       {{item.name}} - {{ item.date | date: 'yyyy/MM/dd HH:mm:ss' }}
   </li>
 </ul>
