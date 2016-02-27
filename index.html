@@ -1,15 +1,13 @@
-<html ng-app><!-- it is required!! -->
+<html ng-app="myApp"><!-- it is required!! -->
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <style>
+      input.ng-invalid{
+        border: solid 1px red;
+      }
+    </style>
 </head>
-
-<style>
-  input.ng-invalid{
-    border: solid 1px red;
-  }
-</style>
-
-<body>
+<body ng-controller="appCtrl as app">
 
 <h1>ngTeratail</h1>
 <p>Hello AngularJS.</p>
@@ -19,9 +17,20 @@
     <input type="text" name="todoName" ng-model="todo" required>
     <p ng-if="false">{{ todo * 1.08 | currency: '¥' : 0 }}</p>
     <p ng-show="todoForm.todoName.$invalid">必須です！！</p>
-    <button ng-disabled="todoForm.$invalid">click</button>
+    <button ng-disabled="todoForm.$invalid" ng-click="app.clickButton();">click</button>
 </form>
+
 <p>税込 {{ todo * 1.08 | currency: '¥' : 0}}</p>
 
+<script>
+(function(){
+    angular.module('myApp', []).controller('appCtrl', [function(){
+        this.clickButton = function() {
+            alert('test');
+        };
+    }]);
+    // この[] 重要
+})();
+</script>
 </body>
 </html>
